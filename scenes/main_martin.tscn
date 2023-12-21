@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://ce4su1es12m5w"]
+
+[ext_resource type="PackedScene" uid="uid://c4ymuehqo14ij" path="res://models/tube_big_v1.glb" id="1_dnuhs"]
+
+[sub_resource type="Environment" id="Environment_mmx03"]
+
+[node name="Main" type="Node3D"]
+
+[node name="tube_big_v1" parent="." instance=ExtResource("1_dnuhs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.28904, 0, -3.31893)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mmx03")
