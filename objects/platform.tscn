@@ -3,7 +3,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_0j225"]
 
 [node name="Platform" type="CSGCylinder3D"]
-transform = Transform3D(1, 0, 0, 0, -1.76382, -0.614656, 0, 53.1697, -0.0203902, 0.628834, 0, 0)
+transform = Transform3D(-0.95882, -15.101, 0.00579113, 0, -1.76382, -0.614656, 0.284015, -50.9801, 0.0195505, 0.628834, 0, 0)
 radius = 0.742
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
