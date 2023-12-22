@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Platformio"
-run/main_scene="res://addons/character-controller/example/main/level.tscn"
+run/main_scene="res://scenes/main_sean.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
