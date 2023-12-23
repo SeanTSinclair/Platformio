@@ -11,6 +11,8 @@ var max_offset_z := 10
 
 var amount_created := 0
 
+var spawned_platforms := []
+
 func AddHorizontalOffsetToVector(vector):
 	var offset_x := randf_range(min_offset_x, max_offset_x)
 	var offset_z := randf_range(min_offset_z, max_offset_z)
@@ -37,5 +39,9 @@ func GenerateNewPlatforms(amount: int):
 		get_parent().add_child.call_deferred(platform)
 		
 		PlacePlatform(platform)
+		spawned_platforms.append(platform)
 		
 		amount_created += 1
+	if spawned_platforms.size() > 50:
+		for i in range(10):
+			spawned_platforms.pop_front().queue_free()
