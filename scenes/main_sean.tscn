@@ -1,14 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://c5sxp1uynaaio"]
+[gd_scene load_steps=10 format=3 uid="uid://c5sxp1uynaaio"]
 
 [ext_resource type="Script" path="res://scripts/level_setup.gd" id="1_3nfsp"]
-[ext_resource type="PackedScene" uid="uid://c4ymuehqo14ij" path="res://models/tube_big_v1.glb" id="1_vh0ii"]
 [ext_resource type="PackedScene" uid="uid://2oxdgu03lnbk" path="res://addons/character-controller/example/main/player.tscn" id="2_ahdp3"]
 [ext_resource type="Texture2D" uid="uid://svijnbaaeuol" path="res://addons/character-controller/example/main/textures/Free DEMO Pixel Skies Background pack by Digital Moons/demo01_PixelSky.png" id="3_53sft"]
-[ext_resource type="Script" path="res://scripts/silo.gd" id="3_k5lkv"]
+[ext_resource type="PackedScene" uid="uid://oq72hmgljlhy" path="res://objects/cylinder.tscn" id="5_bp1qa"]
+[ext_resource type="Script" path="res://scripts/LevelManager.gd" id="6_a2j2r"]
 [ext_resource type="Script" path="res://scripts/LevelGenerator.gd" id="6_klvox"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_eiqmb"]
-size = Vector3(95.8642, 15.0605, 90.9958)
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ob0wf"]
 panorama = ExtResource("3_53sft")
@@ -30,17 +27,6 @@ fog_enabled = true
 [node name="Main" type="Node3D"]
 script = ExtResource("1_3nfsp")
 
-[node name="Silo" parent="." instance=ExtResource("1_vh0ii")]
-transform = Transform3D(0.5, 0, 0, 0, 1.79063, 0, 0, 0, 0.5, 3.28904, 0, -3.31893)
-script = ExtResource("3_k5lkv")
-
-[node name="Area3D" type="Area3D" parent="Silo"]
-transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, -20, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Silo/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("BoxShape3D_eiqmb")
-
 [node name="Player" parent="." instance=ExtResource("2_ahdp3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.296246, 2.69888, 0)
 vertical_horizontal_ratio = 1
@@ -56,7 +42,17 @@ shadow_enabled = true
 directional_shadow_max_distance = 250.0
 
 [node name="LevelGenerator" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("6_klvox")
 
-[connection signal="body_entered" from="Silo/Area3D" to="Silo" method="_on_area_3d_body_entered"]
-[connection signal="body_entered" from="Silo/Area3D" to="LevelGenerator" method="_on_area_3d_body_entered"]
+[node name="Cylinder" parent="." instance=ExtResource("5_bp1qa")]
+unique_name_in_owner = true
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0.078, 0, -0.083)
+
+[node name="LevelManager" type="Node" parent="."]
+script = ExtResource("6_a2j2r")
+
+[connection signal="body_entered" from="Cylinder/Area3D" to="LevelManager" method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Cylinder/Area3D" to="LevelManager" method="_on_area_3d_body_exited"]
+
+[editable path="Cylinder"]

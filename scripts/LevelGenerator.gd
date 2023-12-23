@@ -1,4 +1,5 @@
 extends Node
+class_name LevelGenerator
 
 var platform_scene := preload("res://objects/platform.tscn")
 var vertical_offset := 10
@@ -38,10 +39,3 @@ func GenerateNewPlatforms(amount: int):
 		PlacePlatform(platform)
 		
 		amount_created += 1
-
-func _ready():
-	GenerateNewPlatforms(10)
-
-func _on_area_3d_body_entered(body):
-	print("Oh no")
-	GenerateNewPlatforms(10)

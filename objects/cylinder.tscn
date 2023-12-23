@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://oq72hmgljlhy"]
+
+[ext_resource type="PackedScene" uid="uid://c4ymuehqo14ij" path="res://models/tube_big_v1.glb" id="1_2fggu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k40pu"]
+size = Vector3(9, 1, 9)
+
+[node name="Cylinder" instance=ExtResource("1_2fggu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.85358, 0)
+
+[node name="Cylinder" parent="." index="0"]
+transform = Transform3D(4, 0, 0, 0, 8, 0, 0, 0, 4, 0, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00173092, -17.6792, 0.0380774)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
+shape = SubResource("BoxShape3D_k40pu")
