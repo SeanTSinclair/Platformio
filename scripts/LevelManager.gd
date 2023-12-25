@@ -1,6 +1,6 @@
 extends Node
 
-@export var cylinder_move_distance := 90
+@export var cylinder_move_distance := 120
 
 var level_generator: LevelGenerator
 var cylinder: Node3D

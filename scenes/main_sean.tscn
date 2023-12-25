@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://c5sxp1uynaaio"]
+[gd_scene load_steps=10 format=3 uid="uid://c5sxp1uynaaio"]
 
 [ext_resource type="Script" path="res://scripts/level_setup.gd" id="1_3nfsp"]
 [ext_resource type="PackedScene" uid="uid://2oxdgu03lnbk" path="res://addons/character-controller/example/main/player.tscn" id="2_ahdp3"]
 [ext_resource type="Texture2D" uid="uid://svijnbaaeuol" path="res://addons/character-controller/example/main/textures/Free DEMO Pixel Skies Background pack by Digital Moons/demo01_PixelSky.png" id="3_53sft"]
 [ext_resource type="Script" path="res://scripts/LevelManager.gd" id="6_a2j2r"]
 [ext_resource type="Script" path="res://scripts/LevelGenerator.gd" id="6_klvox"]
+[ext_resource type="Script" path="res://scripts/GameManager.gd" id="6_xnenj"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ob0wf"]
 panorama = ExtResource("3_53sft")
@@ -50,3 +51,9 @@ script = ExtResource("6_a2j2r")
 
 [node name="Cylinder" type="Node3D" parent="."]
 unique_name_in_owner = true
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("6_xnenj")
+
+[connection signal="jumped" from="Player" to="GameManager" method="_on_player_jumped"]
+[connection signal="landed" from="Player" to="GameManager" method="_on_player_landed"]
