@@ -14,25 +14,32 @@ signal on_should_move_cylinder
 var amount_created := 0
 var spawned_platforms := []
 
-func GenerateCylinderObject():
+func GenerateCylinderObjectOld():
 	#https://gamedevacademy.org/csgcylinder3d-in-godot-complete-guide/
 	var cylinder = Node3D.new()
 	
 	# The physical shapes of the cylinder.
 	var outer_cylinder = CSGCylinder3D.new()
-	outer_cylinder.name = "outer_cylinder"
 	var inner_cylinder = CSGCylinder3D.new()
-	inner_cylinder.name = "inner_cylinder"
+
 	# The collision shape of the cylinder.
 	var collision_shape = CollisionShape3D.new()
-	collision_shape.name = "collision_shape"
-	var cylinder_shape = CylinderShape3D.new()
+	#var cylinder_shape = CylinderShape3D.new()
+	var custom_collision_shape = ConcavePolygonShape3D.new()
+	#var vertices = generate_hollow_cylinder_vertices(outer_cylinder, inner_cylinder)
+	#custom_collision_shape.set_faces(vertices)
+	collision_shape.shape = custom_collision_shape
+
 	# For moving the cylinder when the player enters the area.
 	var move_area = Area3D.new()
-	move_area.name = "move_area"
 	var move_collider = CollisionShape3D.new()
-	move_collider.name = "move_collider"
 	var move_shape = CylinderShape3D.new()
+
+	move_area.name = "move_area"
+	move_collider.name = "move_collider"
+	outer_cylinder.name = "outer_cylinder"
+	inner_cylinder.name = "inner_cylinder"
+	
 	
 	# Create the cylinder
 	outer_cylinder.height = cylinder_height
@@ -46,9 +53,7 @@ func GenerateCylinderObject():
 	cylinder.add_child(outer_cylinder)
 	outer_cylinder.add_child(inner_cylinder)
 	
-	cylinder_shape.height = inner_cylinder.height
 	cylinder_radius = inner_cylinder.radius
-	collision_shape.shape = cylinder_shape
 	move_shape.height = 4
 	move_shape.radius = cylinder_radius
 	move_collider.shape = move_shape
@@ -61,6 +66,7 @@ func GenerateCylinderObject():
 	
 	return cylinder
 
+	
 func _on_area_entered(area):
 	on_should_move_cylinder.emit()
 

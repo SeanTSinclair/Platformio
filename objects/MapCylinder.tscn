@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://17u8i6vbkqkl"]
+
+[ext_resource type="Script" path="res://scripts/cylinder_generator.gd" id="1_jfjru"]
+
+[node name="Cylinder" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+script = ExtResource("1_jfjru")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c5sxp1uynaaio"]
+[gd_scene load_steps=11 format=3 uid="uid://c5sxp1uynaaio"]
 
 [ext_resource type="Script" path="res://scripts/level_setup.gd" id="1_3nfsp"]
 [ext_resource type="PackedScene" uid="uid://2oxdgu03lnbk" path="res://addons/character-controller/example/main/player.tscn" id="2_ahdp3"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/LevelManager.gd" id="6_a2j2r"]
 [ext_resource type="Script" path="res://scripts/LevelGenerator.gd" id="6_klvox"]
 [ext_resource type="Script" path="res://scripts/GameManager.gd" id="6_xnenj"]
+[ext_resource type="PackedScene" uid="uid://17u8i6vbkqkl" path="res://objects/MapCylinder.tscn" id="7_joo24"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ob0wf"]
 panorama = ExtResource("3_53sft")
@@ -27,10 +28,12 @@ fog_enabled = true
 [node name="Main" type="Node3D"]
 script = ExtResource("1_3nfsp")
 
-[node name="Player" parent="." instance=ExtResource("2_ahdp3")]
+[node name="Player" parent="." groups=["Player"] instance=ExtResource("2_ahdp3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.296246, 2.69888, 0)
+visible = false
 collision_layer = 3
 vertical_horizontal_ratio = 1
+abilities_path = Array[NodePath]([NodePath("Crouch Ability 3D"), NodePath("Sprint Ability 3D"), NodePath("Walk Ability 3D"), NodePath("Jump Ability 3D")])
 
 [node name="Lighting" type="Node" parent="."]
 
@@ -49,11 +52,10 @@ script = ExtResource("6_klvox")
 [node name="LevelManager" type="Node" parent="."]
 script = ExtResource("6_a2j2r")
 
-[node name="Cylinder" type="Node3D" parent="."]
-unique_name_in_owner = true
-
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("6_xnenj")
+
+[node name="Cylinder" parent="." instance=ExtResource("7_joo24")]
 
 [connection signal="jumped" from="Player" to="GameManager" method="_on_player_jumped"]
 [connection signal="landed" from="Player" to="GameManager" method="_on_player_landed"]

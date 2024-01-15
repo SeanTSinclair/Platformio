@@ -19,6 +19,11 @@ input_crouch_action_name = "move_crouch"
 input_fly_mode_action_name = "move_fly_mode"
 underwater_env = ExtResource("3_dxksd")
 
+[node name="Head Bob" parent="Head" index="1"]
+bob_range = Vector2(0.04, 0.04)
+curve_multiplier = Vector2(1, 1)
+vertical_horizontal_ratio = 1
+
 [node name="Player Audios" parent="." index="9" instance=ExtResource("4_ux8kv")]
 
 [node name="Area3D" type="Area3D" parent="." index="10"]
