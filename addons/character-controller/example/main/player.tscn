@@ -8,6 +8,7 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_sftef"]
 
 [node name="Player" instance=ExtResource("1_fbpun")]
+collision_layer = 5
 script = ExtResource("2_8r0nc")
 input_back_action_name = "move_backward"
 input_forward_action_name = "move_forward"
